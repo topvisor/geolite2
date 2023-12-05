@@ -18,9 +18,17 @@ jobs:
           git config user.name maxmind-updater
           git config user.email maxmind-updater@github-actions
 
+          echo "Downloading .tar.gz with database."
           curl -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
+          ls -la
+		
+          echo "Untaring database"
           tar -xzvf geoLite2City.tar.gz || exit 1
+          ls -la
+
+          echo "Removing archive"
           rm -f geoLite2City.tar.gz
+          ls -la
 
           geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
           if [ -z "$geoLite2CityDir" ]; then exit 1; fi
