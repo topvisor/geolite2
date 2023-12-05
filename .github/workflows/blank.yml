@@ -13,10 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
+      - name: update database
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          git config user.name maxmind-updater
+          git config user.email maxmind-updater@github-actions
+
+          curl -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
+          tar -xzvf geoLite2City.tar.gz || exit 1
+          rm -f geoLite2City.tar.gz
+
+          geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
+          if [ -z "$geoLite2CityDir" ]; then exit 1; fi
+
+          mv -f "$geoLite2CityDir/GeoLite2-City.mmdb" GeoLite2-City.mmdb || exit 1
+          rm -rf "./$geoLite2CityDir"
+
+          git add GeoLite2-City.mmdb || exit 1
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "update GeoLite2-City.mmdb" || exit 1
+            git push || exit 1
+          fi
