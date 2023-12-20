@@ -6,4 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Topvisor\\Geolite2\\' => array($baseDir . '/src'),
 );

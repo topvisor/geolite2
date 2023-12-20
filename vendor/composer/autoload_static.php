@@ -4,8 +4,22 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInited9b9f47bfa0aae50ccf75ad89f5ae4d
+class ComposerStaticInit5727613f298140a7c99b371f43fe8d44
 {
+    public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Topvisor\\Geolite2\\' => 18,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Topvisor\\Geolite2\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -13,7 +27,9 @@ class ComposerStaticInited9b9f47bfa0aae50ccf75ad89f5ae4d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInited9b9f47bfa0aae50ccf75ad89f5ae4d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5727613f298140a7c99b371f43fe8d44::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5727613f298140a7c99b371f43fe8d44::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5727613f298140a7c99b371f43fe8d44::$classMap;
 
         }, null, ClassLoader::class);
     }

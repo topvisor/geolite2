@@ -1,4 +1,15 @@
 {
     "name": "topvisor/geolite2",
+    "autoload": {
+        "psr-4": {
+            "Topvisor\\Geolite2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "artem.artemkin",
+            "email": "artem.artemkin@topvisor.com"
+        }
+    ],
     "require": {}
 }
