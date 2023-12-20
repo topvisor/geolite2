@@ -18,3 +18,5 @@ jobs:
       - name: update database
         run: |
           composer init -n --name=topvisor/geolite2
+          git commit -m "build package topvisor/geolite2" || exit 1
+          git push || exit 1
