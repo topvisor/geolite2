@@ -20,9 +20,6 @@ jobs:
           git config user.name maxmind-updater
           git config user.email maxmind-updater@github-actions
 
-          if [ -z "$MAXMING_LICENSE_KEY" ]; then
-            echo "license key is empty"
-          fi
           echo "Downloading .tar.gz with database."
           curl -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
           ls -la
