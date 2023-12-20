@@ -35,7 +35,7 @@ jobs:
           geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
           if [ -z "$geoLite2CityDir" ]; then exit 1; fi
 
-          mv -f "$geoLite2CityDir/GeoLite2-City.mmdb" GeoLite2-City.mmdb || exit 1
+          mv -f "$geoLite2CityDir/GeoLite2-City.mmdb" src/GeoLite2-City.mmdb || exit 1
           rm -rf "./$geoLite2CityDir"
 
           git add GeoLite2-City.mmdb || exit 1
