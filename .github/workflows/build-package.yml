@@ -18,6 +18,7 @@ jobs:
       - name: update database
         run: |
           composer init -n --name=topvisor/geolite2
+          composer dump-autoload
           git config --global user.email "artem.artemkin@topvisor.com"
           git config --global user.name "Artyom Artyomkin"
           git add . || exit 1
