@@ -1,13 +1,5 @@
 {
     "name": "topvisor/geolite2",
-    "autoload": {
-        "psr-4": {
-            "Topvisor\\Geolite2\\": "src/"
-        },
-        "files": [
-            "src/GeoLite2-City.mmdb"
-        ]
-    },
     "authors": [
         {
             "name": "artem.artemkin",
