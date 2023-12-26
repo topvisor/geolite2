@@ -22,7 +22,7 @@ class Geolite2{
 	}
 
 	private static function getReader(): GeoIp2\Database\Reader{
-		if(!isset(System_2\Geolite2::$reader)) System_2\Geolite2::$reader = new GeoIp2\Database\Reader(__DIR__ . './GeoLite2-City.mmdb');
+		if(!isset(System_2\Geolite2::$reader)) System_2\Geolite2::$reader = new GeoIp2\Database\Reader(__DIR__ . '/GeoLite2-City.mmdb');
 
 		return System_2\Geolite2::$reader;
 	}
