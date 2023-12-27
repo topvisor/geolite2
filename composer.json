@@ -11,5 +11,7 @@
             "email": "artem.artemkin@topvisor.com"
         }
     ],
-    "require": {}
+    "require": {
+        "geoip2/geoip2": "~2.0"
+    }
 }
