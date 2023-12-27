@@ -18,17 +18,26 @@ jobs:
         run: |
 
           revlist="$(git rev-list --tags --max-count=1)"
+          echo "$revlist"
+
           if [ -z "$revlist" ]; then
             latestVersion="1.0.0"
           else
             latestVersion="$(git describe --tags "$revlist")"
           fi
+          echo "$latestVersion"
 
           latestVersionPrefix="$(awk -F'.' '{ $NF=""; print }' <<< "$latestVersion" | tr " " ".")"
+          echo "$latestVersionPrefix"
+
           latestMinorVersion="$(sed "s/$latestVersionPrefix//g" <<< "$latestVersion")"
+          echo "$latestMinorVersion"
+
           newMinorVersion=$(( $latestMinorVersion + 1 ))
+          echo "$newMinorVersion"
+
           newVersion="$latestVersionPrefix$newMinorVersion"
-          
           echo "$newVersion"
+
           git tag "$newVersion"
           git push origin "$newVersion" || exit 1
