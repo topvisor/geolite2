@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/**'
+
+  workflow_dispatch:
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: create tag
+        run: |
+
+          latestVersion="$(git describe --tags $(git rev-list --tags --max-count=1))"
+          if [ -z "$latestVersion" ]; then
+            latestVersion="1.0.0"
+          fi 
+
+          latestVersionPrefix="$(awk -F'.' '{ $NF=""; print }' <<< "$latestVersion" | tr " " ".")"
+          latestMinorVersion="$(sed "s/$latestVersionPrefix//g" <<< "$latestVersion")"
+          newMinorVersion=$(( $latestMinorVersion + 1 ))
+          newVersion="$latestVersionPrefix$newMinorVersion"
+          git tag "$newVersion"
+          git push origin "$newVersion" || exit 1

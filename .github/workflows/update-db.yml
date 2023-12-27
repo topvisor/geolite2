@@ -1,9 +1,6 @@
 name: CI
 
 on:
-  push:
-    paths:
-      - '.github/workflows/**'
   schedule:
     - cron: '0 0 1 * *'
 
@@ -49,12 +46,3 @@ jobs:
             git push || exit 1
           fi
 
-      - name: create tag
-        run: |
-          latestVersion="$(git describe --tags $(git rev-list --tags --max-count=1))"
-          latestVersionPrefix="$(awk -F'.' '{ $NF=""; print }' <<< "$latestVersion" | tr " " ".")"
-          latestMinorVersion="$(sed "s/$latestVersionPrefix//g" <<< "$latestVersion")"
-          newMinorVersion=$(( $latestMinorVersion + 1 ))
-          newVersion="$latestVersionPrefix$newMinorVersion"
-          git tag "$newVersion"
-          git push origin "$newVersion" || exit 1
