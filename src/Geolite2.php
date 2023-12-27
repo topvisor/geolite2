@@ -1,6 +1,6 @@
 <?php
 
-namespace Topvisor\Geolite2
+namespace Topvisor\Geolite2;
 
 use Exception;
 use GeoIp2;
