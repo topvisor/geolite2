@@ -17,6 +17,7 @@ jobs:
       - name: create tag
         run: |
 
+          git fetch --tags origin
           revlist="$(git rev-list --tags --max-count=1)"
           echo "$revlist"
 
