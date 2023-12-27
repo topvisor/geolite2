@@ -2,8 +2,8 @@ name: CI
 
 on:
   push:
-    paths:
-      - '.github/workflows/**'
+    paths-ignore:
+      - "src/GeoLite2-City.mmdb"
 
   workflow_dispatch:
 
