@@ -1,13 +1,9 @@
 <?php
 
-// https://github.com/topvisor/geolite2
-
 namespace Services\System_2;
 
 use Exception;
 use GeoIp2;
-use TV\TV;
-use Services\System_2;
 
 class Geolite2{
 
