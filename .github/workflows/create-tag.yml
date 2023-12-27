@@ -17,10 +17,12 @@ jobs:
       - name: create tag
         run: |
 
-          latestVersion="$(git describe --tags $(git rev-list --tags --max-count=1))"
-          if [ -z "$latestVersion" ]; then
+          revlist="$(git rev-list --tags --max-count=1)"
+          if [ -z "$revlist" ]; then
             latestVersion="1.0.0"
-          fi 
+          else
+            latestVersion="$(git describe --tags "$revlist")"
+          fi
 
           latestVersionPrefix="$(awk -F'.' '{ $NF=""; print }' <<< "$latestVersion" | tr " " ".")"
           latestMinorVersion="$(sed "s/$latestVersionPrefix//g" <<< "$latestVersion")"
