@@ -28,5 +28,7 @@ jobs:
           latestMinorVersion="$(sed "s/$latestVersionPrefix//g" <<< "$latestVersion")"
           newMinorVersion=$(( $latestMinorVersion + 1 ))
           newVersion="$latestVersionPrefix$newMinorVersion"
+          
+          echo "$newVersion"
           git tag "$newVersion"
           git push origin "$newVersion" || exit 1
