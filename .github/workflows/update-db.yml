@@ -28,15 +28,19 @@ jobs:
 
           echo "Untaring database"
           tar -xzvf geoLite2City.tar.gz || exit 1
+          ls -la
 
           echo "Removing archive"
           rm -f geoLite2City.tar.gz
+          ls -la
 
           geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
           if [ -z "$geoLite2CityDir" ]; then exit 1; fi
+          ls -la
 
           mv -f "$geoLite2CityDir/GeoLite2-City.mmdb" src/GeoLite2-City.mmdb || exit 1
           rm -rf "./$geoLite2CityDir"
+          ls -la
 
           git add GeoLite2-City.mmdb || exit 1
           if ! git diff-index --quiet HEAD; then
