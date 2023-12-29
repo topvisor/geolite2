@@ -16,10 +16,12 @@ composer.json:
 		}
 	],
     "require": {
-        "topvisor/geolite2": "~1.0.0"
+        "topvisor/geolite2": "x.x.x"
     }
 }
 ```
+
+где x.x.x - выбранная вами версия composer пакета.
 
 # Пример использования базы данных для поиска информации о городе по ip
 
