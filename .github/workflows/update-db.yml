@@ -14,7 +14,6 @@ on:
     # запуск, если изменился код пакета или пайплайна
     paths:
       - "src/**/*"
-      - "!src/GeoLite2-City.mmdb"
       - ".github/workflows/**/*"
 
 jobs:
