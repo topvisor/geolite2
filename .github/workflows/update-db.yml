@@ -65,7 +65,7 @@ jobs:
 
           # взять последний тег
           if [ -z "$revlist" ]; then
-            latestVersion="1.0.0"
+            latestVersion="v1.0.0"
           else
             latestVersion="$(git describe --tags "$revlist")"
           fi
