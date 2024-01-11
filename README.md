@@ -28,3 +28,9 @@ var_dump(Topvisor\Geolite2\Geolite2::city($ip));
 # Базовые методы
 
 * city(string $ip) - получить объект GeoIp2\Model\City, содержащий информацию о городе, по ip, который в нем расположен
+
+# Лицензия
+geolite2 - это open-source проект, и он распространяется под лицензией [MIT](http://choosealicense.com/licenses/mit/)
+
+Проект включает в себя данные GeoLite, созданные MaxMind.
+<a href="http://www.maxmind.com">http://www.maxmind.com</a>.
