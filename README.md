@@ -9,12 +9,6 @@
 composer.json:
 ```json
 {
-    "repositories":[
-		{
-			"url":"https://github.com/topvisor/geolite2.git",
-			"type":"git"
-		}
-	],
     "require": {
         "topvisor/geolite2": "x.x.x"
     }
