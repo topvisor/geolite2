@@ -1,7 +1,8 @@
 # пайплайн раз в месяц обновляет базу данных GeoLite2-City.mmdb и создает новый тег
-name: CI
+name: update-db
 
 on:
+  # пайплайн запускается по расписанию и при пуше
   schedule:
     # запуск ежемесячно (в 00:00, 1-го числа, каждый месяц, независимо от дня недели)
     - cron: "0 0 1 * *"
@@ -9,6 +10,7 @@ on:
     # не запускать повторно при создании тега
     tags-ignore:
       - "**"
+    # запуск только при пуше в мастер
     branches:
       - "master"
     # запуск, если изменился код пакета или пайплайна
@@ -17,6 +19,7 @@ on:
       - ".github/workflows/**/*"
 
 jobs:
+  # эта задача обновляет базу данных и создает новый тег в репозитории
   update-database:
     runs-on: ubuntu-latest
 
@@ -25,16 +28,20 @@ jobs:
 
       - name: update database
         env:
+          # этот секрет нужен для скачивания базы данных geolite2
           MAXMIND_LICENSE_KEY: ${{ secrets.MAXMIND_LICENSE_KEY }}
         run: |
+
+          # без установки этих настроек git не позволит совершать операции
           git config user.name maxmind-updater
           git config user.email maxmind-updater@github-actions
 
-          # скачать базу данных
+          # скачать и разархивировать базу данных
           curl -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
           tar -xzvf geoLite2City.tar.gz || exit 1
           rm -f geoLite2City.tar.gz
 
+          # если не найден файл с базой данных, выход с ошибкой
           geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
           if [ -z "$geoLite2CityDir" ]; then exit 1; fi
 
