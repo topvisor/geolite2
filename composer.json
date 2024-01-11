@@ -1,5 +1,6 @@
 {
     "name": "topvisor/geolite2",
+	"license":"MIT",
     "autoload": {
         "psr-4": {
             "Topvisor\\Geolite2\\": "src/"
