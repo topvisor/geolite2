@@ -37,7 +37,7 @@ jobs:
           git config user.email maxmind-updater@github-actions
 
           # скачать и разархивировать базу данных
-          curl -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
+          curl -L -o geoLite2City.tar.gz --url "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz" || exit 1
           tar -xzvf geoLite2City.tar.gz || exit 1
           rm -f geoLite2City.tar.gz
 
