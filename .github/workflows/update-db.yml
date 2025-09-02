@@ -37,7 +37,8 @@ jobs:
           git config user.email maxmind-updater@github-actions
 
           # скачать и разархивировать базу данных
-          wget --quiet $(curl -sSL -X GET https://geoip.elastic.co/v1/database?elastic_geoip_service_tos=agree | jq -r '.[1].url') -O "./geoLite2City.tar.gz" || exit 1          tar -xzvf geoLite2City.tar.gz || exit 1
+          wget --quiet $(curl -sSL -X GET https://geoip.elastic.co/v1/database?elastic_geoip_service_tos=agree | jq -r '.[1].url') -O "./geoLite2City.tar.gz" || exit 1
+          tar -xzvf geoLite2City.tar.gz || exit 1
           rm -f geoLite2City.tar.gz
 
           # если не найден файл с базой данных, выход с ошибкой
