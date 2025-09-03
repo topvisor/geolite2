@@ -42,8 +42,11 @@ jobs:
           rm -f geoLite2City.tar.gz
 
           # если не найден файл с базой данных, выход с ошибкой
-          geoLite2CityDir="$(ls | grep "GeoLite2-City_" | head -n 1)"
-          if [ -z "$geoLite2CityDir" ]; then exit 1; fi
+          geoLite2CityDir="$(ls | grep "GeoLite2-City.mmdb" | head -n 1)"
+          if [ -z "$geoLite2CityDir" ]; then
+            echo "File GeoLite2-City.mmdb not found."
+            exit 1
+          fi
 
           # переместить базу данных в нужное место
           geoliteCityDbDestPath="src/GeoLite2-City.mmdb"
