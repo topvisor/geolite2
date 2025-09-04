@@ -39,6 +39,7 @@ jobs:
           # скачать и разархивировать базу данных
           wget --quiet $(curl -sSL -X GET https://geoip.elastic.co/v1/database?elastic_geoip_service_tos=agree | jq -r '.[1].url') -O "./geoLite2City.tar.gz" || exit 1
           geoLite2CityDir="GeoLite2-City"
+          mkdir -p "$geoLite2CityDir"
           tar -xzvf geoLite2City.tar.gz -C "$geoLite2CityDir" || exit 1
           rm -f geoLite2City.tar.gz
 
