@@ -38,15 +38,9 @@ jobs:
 
           # скачать и разархивировать базу данных
           wget --quiet $(curl -sSL -X GET https://geoip.elastic.co/v1/database?elastic_geoip_service_tos=agree | jq -r '.[1].url') -O "./geoLite2City.tar.gz" || exit 1
-          tar -xzvf geoLite2City.tar.gz || exit 1
+          geoLite2CityDir="GeoLite2-City"
+          tar -xzvf geoLite2City.tar.gz -C "$geoLite2CityDir" || exit 1
           rm -f geoLite2City.tar.gz
-
-          # если не найден файл с базой данных, выход с ошибкой
-          geoLite2CityDir="$(ls | grep "GeoLite2-City.mmdb" | head -n 1)"
-          if [ -z "$geoLite2CityDir" ]; then
-            echo "File GeoLite2-City.mmdb not found."
-            exit 1
-          fi
 
           # переместить базу данных в нужное место
           geoliteCityDbDestPath="src/GeoLite2-City.mmdb"
